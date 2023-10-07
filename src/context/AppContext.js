@@ -12,7 +12,8 @@ export default function AppContextProvider({children}) {
     const [totalPages, setTotalPages] = useState(null);
 
     //data filling
-async function fetchBlogPosts(page = 1) {
+
+    async function fetchBlogPosts(page = 1) {
         setLoading(true);
 
         let url = `${baseUrl}?page=${page}`;
@@ -40,3 +41,21 @@ async function fetchBlogPosts(page = 1) {
         setPage(page);
         fetchBlogPosts(page);
     }
+
+    const value = {
+        posts,
+        setPosts,
+        loading,
+        setLoading,
+        page,
+        setPage,
+        totalPages,
+        setTotalPages,
+        fetchBlogPosts,
+        handlePageChange
+    };
+
+    return <AppContext.Provider value={value}>
+        {children}
+    </AppContext.Provider>;
+}
