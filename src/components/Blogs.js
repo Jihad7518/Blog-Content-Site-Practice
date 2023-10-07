@@ -1,4 +1,3 @@
-B
 
 import React, { useContext } from 'react'
 import { AppContext } from '../context/AppContext';
@@ -20,3 +19,28 @@ const Blogs = () => {
       (<Spinner/>) : 
       (
         posts.length === 0 ? 
+        (<div>
+          <p>No Post Found</p>
+        </div>) : 
+        (posts.map( (post) => (
+          <div key={post.id}>
+            <p className='font-bold text-lg'>{post.title}</p>
+            <p className='text-sm mt-[4px]'>
+              By <span className='italic'>{post.author}</span> on <span className='underline font-bold'>{post.category}</span>
+            </p>
+            <p className='text-sm mt-[3px]'>Posted on {post.date}</p>
+            <p className='text-md mt-[14px]'>{post.content}</p>
+            <div className='felx gap-x-3'>
+              {post.tags.map( (tag, index) => {
+                return <span key={index} className='text-blue-700 underline font-bold mt-[5px] text-xs'>{`#${tag}`}</span>
+              })}
+            </div>
+        </div>)))
+      )
+    }
+      
+    </div>
+  );
+}
+
+export default Blogs
